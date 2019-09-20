@@ -42,6 +42,7 @@ public class FishGame {
 	 * Score!
 	 */
 	int score;
+
 	
 	/**
 	 * Create a FishGame of a particular size.
@@ -57,13 +58,16 @@ public class FishGame {
 		// Add a home!
 		home = world.insertFishHome();
 		
-		// TODO(lab) Generate some more rocks!
-		// TODO(lab) Make 5 into a constant, so it's easier to find & change.
-		for (int i=0; i<5; i++) {
+		// (lab) Generate some more rocks!
+		int numrocks = 10;
+		
+		// (lab) Make 5 into a constant, so it's easier to find & change.
+		for (int i=0; i < numrocks; i++) {
 			world.insertRockRandomly();
 		}
 		
-		// TODO(lab) Make the snail!
+		// (lab) Make the snail!
+		world.insertSnailRandomly();
 		
 		// Make the player out of the 0th fish color.
 		player = new Fish(0, world);
@@ -117,8 +121,8 @@ public class FishGame {
 				missing.remove(wo);
 				
 				// Remove from world.
-				// TODO(lab): add to found instead! (So we see objectsFollow work!)
-				world.remove(wo);
+				// (lab): add to found instead! (So we see objectsFollow work!)
+				found.add((Fish)wo); //we are casting the world object (item) to the Fish class				
 				
 				// Increase score when you find a fish!
 				score += 10;
@@ -141,7 +145,10 @@ public class FishGame {
 		for (Fish lost : missing) {
 			// 30% of the time, lost fish move randomly.
 			if (rand.nextDouble() < 0.3) {
-				// TODO(lab): What goes here?
+				// (lab): What goes here?
+				lost.moveRandomly();
+				
+				
 			}
 		}
 	}

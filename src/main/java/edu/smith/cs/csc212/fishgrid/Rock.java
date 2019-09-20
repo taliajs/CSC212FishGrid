@@ -25,9 +25,11 @@ public class Rock extends WorldObject {
 			new Color(152,129,123),
 			new Color(138,129,141),
 			new Color(72,60,50)
+			
 	};
 	
-	// TODO(lab): introduce a variable that is part of the class (one per Rock object) here that indexes the ROCK_COLORS array.
+	// (lab): introduce a variable that is part of the class (one per Rock object) here that indexes the ROCK_COLORS array.
+	int color; 
 	
 	/**
 	 * Construct a Rock in our world.
@@ -35,17 +37,19 @@ public class Rock extends WorldObject {
 	 */
 	public Rock(World world) {
 		super(world);
-		// TODO(lab): initialize your rock color index to a random number!
+		//(lab): initialize your rock color index to a random number!
+		color = rand.nextInt(ROCK_COLORS.length);
 		// Note that all WorldObjects have a ``rand`` available so you don't need to make one.
-	}
+	} 
 
 	/**
 	 * Draw a rock!
 	 */
 	@Override
 	public void draw(Graphics2D g) {
-		// TODO(lab): use the right color in here...
-		g.setColor(Color.gray);
+		//(lab): use the right color in here...
+		
+		g.setColor(ROCK_COLORS[color]); //set the color to the index in the array
 		RoundRectangle2D rock = new RoundRectangle2D.Double(-.5,-.5,1,1,0.3,0.3);
 		g.fill(rock);
 	}
