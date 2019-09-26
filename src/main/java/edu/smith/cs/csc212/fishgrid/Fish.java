@@ -15,6 +15,9 @@ public class Fish extends WorldObject {
 	/**
 	 * A fish is only special because of its color now!
 	 */
+	
+	boolean isScared = rand.nextBoolean();
+	
 	static Color[] COLORS = {
 			Color.red,
 			Color.green,
@@ -26,8 +29,15 @@ public class Fish extends WorldObject {
 			Color.cyan,
 			Color.magenta
 			
-			// TODO: (FishGrid) Maybe make a special fish that is more points?
-	};
+			// (FishGrid) Maybe make a special fish that is more points?
+			// code is in FishGame.java
+	}; 
+	
+	boolean isLittle;
+	public void isScared () {
+		this.isLittle = true;
+	}
+	
 	/**
 	 * This is an index into the {@link #COLORS} array.
 	 */
@@ -42,6 +52,7 @@ public class Fish extends WorldObject {
 	 */
 	public void markAsPlayer() {
 		this.player = true;
+		this.isScared = false;
 	}
 
 
@@ -78,10 +89,22 @@ public class Fish extends WorldObject {
 		if (dt > 100) {
 			dt = 0;
 		}
-		Shape circle = new Ellipse2D.Double(-0.6, -0.6, 1.2, 1.2);
-		Shape body = new Ellipse2D.Double(-.40, -.2, .8, .4);
-		Shape tail = new Ellipse2D.Double(+.2, -.3, .2, .6);
-		Shape eye = new Ellipse2D.Double(-.25, -.1, .1, .1);
+		Shape circle;
+		Shape body;
+		Shape tail;
+		Shape eye;
+		
+		if (isScared) { //scaled it down by half 
+			circle = new Ellipse2D.Double(-0.6/2, -0.6/2, 1.2/2, 1.2/2);
+			body = new Ellipse2D.Double(-.40/2, -.2/2, .8/2, .4/2);
+			tail = new Ellipse2D.Double(+.2/2, -.3/2, .2/2, .6/2);
+			eye = new Ellipse2D.Double(-.25/2, -.1/2, .1/2, .1/2);
+		} else {
+			circle = new Ellipse2D.Double(-0.6, -0.6, 1.2, 1.2);
+			body = new Ellipse2D.Double(-.40, -.2, .8, .4);
+			tail = new Ellipse2D.Double(+.2, -.3, .2, .6);
+			eye = new Ellipse2D.Double(-.25, -.1, .1, .1);
+		}
 		
 		Color color = getColor();
 		Color tailColor = color.darker();
@@ -91,6 +114,8 @@ public class Fish extends WorldObject {
 		if (dt < 50) {
 			flipped.scale(-1, 1);
 		}
+		
+		
 		
 		if (this.player) {
 			flipped.setColor(new Color(1f,1f,1f,0.5f));
@@ -109,7 +134,11 @@ public class Fish extends WorldObject {
 		flipped.fill(tail);
 		
 		flipped.dispose();
+	
+	
 	}
+	
+	
 	
 	@Override
 	public void step() {

@@ -158,6 +158,15 @@ public class World {
 	}
 	
 	/**
+	 * Insert Falling Rock
+	 */
+	public FallingRock insertFallingRockRandomly() {
+		FallingRock f = new FallingRock(this);
+		insertRandomly(f);
+		return f;
+	}
+	
+	/**
 	 * Insert a new Fish into the world at random of a specific color.
 	 * @param color - the color of the fish.
 	 * @return the new fish itself.
@@ -235,7 +244,11 @@ public class World {
 	public static void objectsFollow(WorldObject target, List<? extends WorldObject> followers) {
 		// TODO(FishGrid) Comment this method!
 		// What is recentPositions?
+		System.out.println("Recent Positions:" + target.recentPositions);
+		//recentPositions are the positions of the player fish
+	
 		// What is followers?
+		System.out.println("Followers:" + followers);
 		// What is target?
 		// Why is past = putWhere[i+1]? Why not putWhere[i]?
 		List<IntPoint> putWhere = new ArrayList<>(target.recentPositions);

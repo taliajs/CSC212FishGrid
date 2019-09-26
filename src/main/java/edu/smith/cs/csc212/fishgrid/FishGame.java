@@ -1,5 +1,6 @@
 package edu.smith.cs.csc212.fishgrid;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -33,6 +34,9 @@ public class FishGame {
 	 */
 	List<Fish> found;
 	
+	Fish isScared;
+	
+	
 	/**
 	 * Number of steps!
 	 */
@@ -42,6 +46,7 @@ public class FishGame {
 	 * Score!
 	 */
 	int score;
+	
 
 	
 	/**
@@ -68,6 +73,9 @@ public class FishGame {
 		
 		// (lab) Make the snail!
 		world.insertSnailRandomly();
+		
+		//Insert Falling Rock
+		world.insertFallingRockRandomly();
 		
 		// Make the player out of the 0th fish color.
 		player = new Fish(0, world);
@@ -125,7 +133,11 @@ public class FishGame {
 				found.add((Fish)wo); //we are casting the world object (item) to the Fish class				
 				
 				// Increase score when you find a fish!
-				score += 10;
+				if (((Fish)wo).getColor() == Color.green) {
+					score += 20;
+				} else {
+					score += 10;
+				}
 			}
 		}
 		
@@ -139,16 +151,24 @@ public class FishGame {
 	
 	/**
 	 * Call moveRandomly() on all of the missing fish to make them seem alive.
-	 */
+	 */ 
+	//hold down space bar to test speed of the fishies, 
+	// professor made tiny fish scared (they move faster) and the big fish slower --> easier for me to see
+	//if i got it
 	private void wanderMissingFish() {
 		Random rand = ThreadLocalRandom.current();
 		for (Fish lost : missing) {
 			// 30% of the time, lost fish move randomly.
-			if (rand.nextDouble() < 0.3) {
-				// (lab): What goes here?
-				lost.moveRandomly();
-				
-				
+			if (lost.isScared) {
+				if (rand.nextDouble () < 0.8) { 
+					lost.moveRandomly();
+				} 
+			} else {
+				if (rand.nextDouble() < 0.3) {
+					// (lab): What goes here?
+					lost.moveRandomly();
+					
+				}
 			}
 		}
 	}

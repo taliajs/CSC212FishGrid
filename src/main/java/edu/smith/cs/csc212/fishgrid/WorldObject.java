@@ -138,7 +138,7 @@ public abstract class WorldObject {
 	 * 
 	 * @return true if it moved!
 	 */
-	public boolean moveDown() {
+	public boolean moveDown() { 
 		if (world.canSwim(this, x, y + 1)) {
 			this.y += 1;
 			updatePosition();
