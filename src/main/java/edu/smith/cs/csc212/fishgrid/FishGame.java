@@ -128,8 +128,7 @@ public class FishGame {
 				// Remove this fish from the missing list.
 				missing.remove(wo);
 				
-				// Remove from world.
-				// (lab): add to found instead! (So we see objectsFollow work!)
+				// Add to found instead! 
 				found.add((Fish)wo); //we are casting the world object (item) to the Fish class				
 				
 				// Increase score when you find a fish!
@@ -152,20 +151,18 @@ public class FishGame {
 	/**
 	 * Call moveRandomly() on all of the missing fish to make them seem alive.
 	 */ 
-	//hold down space bar to test speed of the fishies, 
-	// professor made tiny fish scared (they move faster) and the big fish slower --> easier for me to see
-	//if i got it
+
 	private void wanderMissingFish() {
 		Random rand = ThreadLocalRandom.current();
 		for (Fish lost : missing) {
-			// 30% of the time, lost fish move randomly.
+			// If a fish isScared, 80% of the time it moves randomly. 
+			// If it's not a scared fish, 30% of the time it moves randomly.
 			if (lost.isScared) {
 				if (rand.nextDouble () < 0.8) { 
 					lost.moveRandomly();
 				} 
 			} else {
 				if (rand.nextDouble() < 0.3) {
-					// (lab): What goes here?
 					lost.moveRandomly();
 					
 				}
@@ -183,6 +180,9 @@ public class FishGame {
 		System.out.println("Clicked on: "+x+","+y+ " world.canSwim(player,...)="+world.canSwim(player, x, y));
 		List<WorldObject> atPoint = world.find(x, y);
 		// TODO(FishGrid) allow the user to click and remove rocks.
+		
+		
+		
 
 	}
 	

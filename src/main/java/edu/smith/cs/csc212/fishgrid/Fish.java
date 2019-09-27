@@ -19,18 +19,15 @@ public class Fish extends WorldObject {
 	boolean isScared = rand.nextBoolean();
 	
 	static Color[] COLORS = {
-			Color.red,
-			Color.green,
+			Color.red, //color of player fish
+			Color.green, //color of fish worth extra points
 			Color.yellow,
-			//(lab) Add more colors.
 			Color.pink,
 			Color.blue,
 			Color.orange, 
 			Color.cyan,
 			Color.magenta
 			
-			// (FishGrid) Maybe make a special fish that is more points?
-			// code is in FishGame.java
 	}; 
 	
 	boolean isLittle;

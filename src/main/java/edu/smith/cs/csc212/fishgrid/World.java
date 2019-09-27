@@ -242,20 +242,39 @@ public class World {
 	 * @param followers a set of objects to follow the leader.
 	 */
 	public static void objectsFollow(WorldObject target, List<? extends WorldObject> followers) {
-		// TODO(FishGrid) Comment this method!
 		// What is recentPositions?
-		System.out.println("Recent Positions:" + target.recentPositions);
-		//recentPositions are the positions of the player fish
+			//System.out.println("Recent Positions:" + target.recentPositions);
+			//recentPositions are the positions of the player fish
 	
 		// What is followers?
-		System.out.println("Followers:" + followers);
+			//System.out.println("Followers:" + followers);
+			//Followers are an array of the fish that have been found and are following the player fish.
+			//When a missing fish becomes a "follower" it is assigned an ID that specifies which
+			//position in the array it is. 
+		
 		// What is target?
+		//target is the player fish (aka the red fish)
+		
 		// Why is past = putWhere[i+1]? Why not putWhere[i]?
+			//We want to put the new (or more recent) position of the player into the array. To do this, we 
+			//need to move the old position over by 1. 
+		
+		
 		List<IntPoint> putWhere = new ArrayList<>(target.recentPositions);
 		for (int i=0; i < followers.size() && i+1 < putWhere.size(); i++) {
 			// What is the deal with the two conditions in this for-loop?
+				//the size of putWhere needs to be greater than the number of steps the player has 
+				//actually taken. 
+				//The index of the list of followers is less than the number of followers. 
+			
+			System.out.println("followers size: " + followers.size());
+			System.out.println("putwhere: " + putWhere.size());
+			System.out.println("i:" + i);
+
+		
 			IntPoint past = putWhere.get(i+1);
 			followers.get(i).setPosition(past.x, past.y);
-		}
-	}
+			
+		} 
+	} 
 }
