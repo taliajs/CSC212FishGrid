@@ -28,7 +28,9 @@ public class Rock extends WorldObject {
 			
 	};
 	
-	// (lab): introduce a variable that is part of the class (one per Rock object) here that indexes the ROCK_COLORS array.
+	// (lab): introduce a variable that is part of the class (one per Rock object) 
+			//here that indexes the ROCK_COLORS array.
+	
 	int color; 
 	
 	/**
@@ -58,5 +60,6 @@ public class Rock extends WorldObject {
 	public void step() {
 		// Rocks don't actually *do* anything.		
 	}
+	
 
 }

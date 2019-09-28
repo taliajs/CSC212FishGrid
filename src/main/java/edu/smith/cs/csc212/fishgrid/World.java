@@ -158,12 +158,23 @@ public class World {
 	}
 	
 	/**
-	 * Insert Falling Rock
+	 * Insert Falling Rock randomly
+	 * @return the Falling Rock
 	 */
 	public FallingRock insertFallingRockRandomly() {
 		FallingRock f = new FallingRock(this);
 		insertRandomly(f);
 		return f;
+	}
+	
+	/**
+	 * Insert Food randomly
+	 * @return food
+	 */
+	public Food insertFoodRandomly( ) {
+		Food fo = new Food(this);
+		insertRandomly(fo);
+		return fo;
 	}
 	
 	/**
@@ -213,8 +224,20 @@ public class World {
 		List<WorldObject> inSpot = this.find(x, y);
 		
 		for (WorldObject it : inSpot) {
-			// TODO(FishGrid): Don't let us move over rocks as a Fish.
-			// The other fish shouldn't step "on" the player, the player should step on the other fish.
+			//(FishGrid): Don't let us move over rocks as a Fish.
+			if (it instanceof Rock) {
+				return false;
+			}
+
+			if (it instanceof FishHome) {
+				return false;
+			}
+			
+			if (it instanceof FallingRock) {
+				return false;
+			}
+		
+	
 			if (it instanceof Snail) {
 				// This if-statement doesn't let anyone step on the Snail.
 				// The Snail(s) are not gonna take it.
@@ -243,17 +266,15 @@ public class World {
 	 */
 	public static void objectsFollow(WorldObject target, List<? extends WorldObject> followers) {
 		// What is recentPositions?
-			//System.out.println("Recent Positions:" + target.recentPositions);
 			//recentPositions are the positions of the player fish
 	
 		// What is followers?
-			//System.out.println("Followers:" + followers);
 			//Followers are an array of the fish that have been found and are following the player fish.
 			//When a missing fish becomes a "follower" it is assigned an ID that specifies which
 			//position in the array it is. 
 		
 		// What is target?
-		//target is the player fish (aka the red fish)
+			//target is the player fish (aka the red fish)
 		
 		// Why is past = putWhere[i+1]? Why not putWhere[i]?
 			//We want to put the new (or more recent) position of the player into the array. To do this, we 
@@ -264,12 +285,7 @@ public class World {
 		for (int i=0; i < followers.size() && i+1 < putWhere.size(); i++) {
 			// What is the deal with the two conditions in this for-loop?
 				//the size of putWhere needs to be greater than the number of steps the player has 
-				//actually taken. 
-				//The index of the list of followers is less than the number of followers. 
-			
-			System.out.println("followers size: " + followers.size());
-			System.out.println("putwhere: " + putWhere.size());
-			System.out.println("i:" + i);
+				//actually taken. The index of the list of followers is less than the number of followers. 
 
 		
 			IntPoint past = putWhere.get(i+1);
